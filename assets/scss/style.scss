@@ -1,0 +1,61 @@
+$title: #ff4327;
+$paragraph: #FFD3CD;
+$back-grond: #011627;
+$article-back-ground: #ffd3cd0c;
+$bubbles-dark: #260046;
+$bubble-light: #8c56bb;  
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $back-grond;
+    height: 100vh;
+    overflow: auto;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    h1 {
+        margin: 2% 0 0 0;
+        color: $title;
+        font-size: 60px;
+        z-index: 5;
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    scrollbar-width: none;
+}
+
+body {
+    -ms-overflow-style: none;
+}
+
+.load-button {
+    display: block;
+    background-color: $title;
+    color: $back-grond;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    margin: 0 auto;
+    width: 200px;
+    height: 40px;
+}
+
+@import "_bubble.scss";
+
+@import "_article.scss";

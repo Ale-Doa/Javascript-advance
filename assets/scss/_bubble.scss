@@ -1,0 +1,36 @@
+.bubble {
+    position: fixed;
+    border-radius: 50%;
+    background-image: radial-gradient(circle, $bubble-light, $bubbles-dark);
+    aspect-ratio: 1;
+}
+
+.bubble-1 {
+    top: 3vh;
+    left: 7vh;
+    width: 27%;
+}
+
+.bubble-2 {
+    top: 40vh;
+    left: 85vh;
+    width: 17%;
+}
+
+.bubble-3 {
+    top: -9vh;
+    right: -9vh;
+    width: 32%;
+}
+
+.bubble-4 {
+    top: 65vh;
+    left: 25vh;
+    width: 14%;
+}
+
+.bubble-5 {
+    top: 70vh;
+    right: -1vh;
+    width: 25%;
+}
