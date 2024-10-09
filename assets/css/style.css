@@ -6,8 +6,8 @@
 
 body {
   background-color: #011627;
-  height: 100vh;
-  overflow: auto;
+  -ms-overflow-style: none;
+  font-family: "Roboto Mono", monospace, Arial, Helvetica, sans-serif;
 }
 
 header {
@@ -16,10 +16,11 @@ header {
   align-items: center;
   width: 100%;
 }
-header h1 {
+
+.header-title {
   margin: 2% 0 0 0;
-  color: #ff4327;
-  font-size: 60px;
+  color: #ff5927;
+  font-size: 6vw;
   z-index: 5;
 }
 
@@ -31,20 +32,20 @@ html {
   scrollbar-width: none;
 }
 
-body {
-  -ms-overflow-style: none;
-}
-
 .load-button {
   display: block;
-  background-color: #ff4327;
+  position: relative;
+  background-color: #ff5927;
   color: #011627;
   border: none;
-  border-radius: 10px;
+  border-radius: 60px;
   cursor: pointer;
+  z-index: 5;
+  font-size: 25px;
+  font-weight: bold;
   margin: 0 auto;
-  width: 200px;
-  height: 40px;
+  width: 300px;
+  height: 85px;
 }
 
 .bubble {
@@ -55,37 +56,37 @@ body {
 }
 
 .bubble-1 {
-  top: 3vh;
-  left: 7vh;
+  top: 3%;
+  left: 3%;
   width: 27%;
 }
 
 .bubble-2 {
-  top: 40vh;
-  left: 85vh;
+  top: 40%;
+  left: 44%;
   width: 17%;
 }
 
 .bubble-3 {
-  top: -9vh;
-  right: -9vh;
+  top: -9%;
+  right: -5%;
   width: 32%;
 }
 
 .bubble-4 {
-  top: 65vh;
-  left: 25vh;
+  top: 68%;
+  left: 10%;
   width: 14%;
 }
 
 .bubble-5 {
-  top: 70vh;
-  right: -1vh;
+  top: 70%;
+  right: 5%;
   width: 25%;
 }
 
 .news {
-  margin: 4% 13% 5% 13%;
+  margin: 4% 13% 5% 10%;
   border-radius: 25px;
   overflow: auto;
   max-height: 61vh;
@@ -94,14 +95,14 @@ body {
 .article {
   position: relative;
   display: block;
-  background-color: rgba(255, 211, 205, 0.0470588235);
+  background-color: rgba(255, 255, 255, 0.0196078431);
   backdrop-filter: blur(10px);
   color: #FFD3CD;
   border-radius: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.4);
   border-left: 1px solid rgba(255, 255, 255, 0.3);
-  height: 150px;
-  margin: 10px 0 0 0;
+  height: 16vh;
+  margin: 1vh 0 0 0;
   padding: 10px 10px;
   text-align: left;
   text-decoration: none;
@@ -109,9 +110,8 @@ body {
 
 .title {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 40px;
+  top: 7%;
+  left: 1.5%;
   max-width: 97%;
   white-space: nowrap;
   overflow: hidden;
@@ -120,15 +120,87 @@ body {
 
 .date {
   position: absolute;
-  top: 120px;
-  right: 5px;
+  bottom: 7%;
+  right: 1.5%;
   text-align: right;
-  margin-right: 7px;
 }
 
 .author {
   position: absolute;
-  top: 117px;
-  left: 10px;
-  font-size: 20px;
+  bottom: 7%;
+  left: 1.5%;
+}
+
+@media screen and (orientation: portrait) {
+  .news {
+    max-height: 75vh;
+  }
+  .bubble-1 {
+    top: 3%;
+    left: 3%;
+    width: 40%;
+  }
+  .bubble-2 {
+    top: 35%;
+    left: 46%;
+    width: 35%;
+  }
+  .bubble-3 {
+    top: -9%;
+    right: -5%;
+    width: 37%;
+  }
+  .bubble-4 {
+    top: 70%;
+    left: 8%;
+    width: 27%;
+  }
+  .bubble-5 {
+    top: 75%;
+    right: 1%;
+    width: 35%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .article {
+    max-height: 10vh;
+  }
+  .header-title {
+    font-size: 7.2vw;
+    margin: 5vh 0 1vh 0;
+  }
+  .load-button {
+    width: 170px;
+    height: 45px;
+    font-size: 18px;
+    margin: 2vh auto 2vh auto;
+  }
+  .news {
+    max-height: 77vh;
+  }
+  .bubble-1 {
+    top: 15%;
+    left: -5%;
+    width: 50%;
+  }
+  .bubble-2 {
+    top: 43%;
+    left: 45%;
+    width: 47%;
+  }
+  .bubble-3 {
+    top: -3%;
+    right: -5%;
+    width: 53%;
+  }
+  .bubble-4 {
+    top: 68%;
+    left: 7%;
+    width: 30%;
+  }
+  .bubble-5 {
+    top: 75%;
+    right: -1%;
+    width: 40%;
+  }
 }

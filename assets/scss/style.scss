@@ -1,7 +1,8 @@
-$title: #ff4327;
+$title: #ff5927;
+$button: #ff5927;
 $paragraph: #FFD3CD;
 $back-grond: #011627;
-$article-back-ground: #ffd3cd0c;
+$article-back-ground: #ffffff05;
 $bubbles-dark: #260046;
 $bubble-light: #8c56bb;  
 
@@ -13,8 +14,8 @@ $bubble-light: #8c56bb;
 
 body {
     background-color: $back-grond;
-    height: 100vh;
-    overflow: auto;
+    -ms-overflow-style: none;
+    font-family: "Roboto Mono", monospace, Arial, Helvetica, sans-serif;
 }
 
 header {
@@ -22,13 +23,13 @@ header {
     justify-content: center;
     align-items: center;
     width: 100%;
+}
 
-    h1 {
-        margin: 2% 0 0 0;
-        color: $title;
-        font-size: 60px;
-        z-index: 5;
-    }
+.header-title {
+    margin: 2% 0 0 0;
+    color: $title;
+    font-size: 6vw;
+    z-index: 5;
 }
 
 ::-webkit-scrollbar {
@@ -39,23 +40,25 @@ html {
     scrollbar-width: none;
 }
 
-body {
-    -ms-overflow-style: none;
-}
-
 .load-button {
     display: block;
-    background-color: $title;
+    position: relative;
+    background-color: $button;
     color: $back-grond;
     border: none;
-    border-radius: 10px;
+    border-radius: 60px;
     cursor: pointer;
+    z-index: 5;
+    font-size: 25px;
+    font-weight: bold;
 
     margin: 0 auto;
-    width: 200px;
-    height: 40px;
+    width: 300px;
+    height: 85px;
 }
 
 @import "_bubble.scss";
 
 @import "_article.scss";
+
+@import "_media-query.scss";

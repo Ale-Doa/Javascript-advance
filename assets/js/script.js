@@ -18,7 +18,7 @@ async function fetchNewsItem(id) {
 function createArticle(newsItem) {
     const article = document.createElement('a');
     article.className = 'article';
-    article.target = '_blunk';
+    article.target = '_blank';
     article.href = newsItem.url;
 
     const title = document.createElement('h2');
@@ -40,6 +40,40 @@ function createArticle(newsItem) {
     return article;
 };
 
+function resizeArticlesText() {
+    const articles = document.querySelector('.article');
+    const titles = document.querySelectorAll('.title');
+    const dates = document.querySelectorAll('.date');
+    const authors = document.querySelectorAll('.author');
+    const articleHeight = articles.offsetHeight;
+
+    titles.forEach(title => {
+        title.style.fontSize = (articleHeight * 0.33) + 'px';
+    });
+
+    dates.forEach(date => {
+        date.style.fontSize = (articleHeight * 0.15) + 'px';
+    });
+
+    authors.forEach(author => {
+        author.style.fontSize = (articleHeight * 0.15) + 'px';
+    });
+
+    if(articles.offsetWidth < 790) {
+        titles.forEach(title => {
+            title.style.fontSize = (articleHeight * 0.30) + 'px';
+        });
+    
+        dates.forEach(date => {
+            date.style.fontSize = (articleHeight * 0.10) + 'px';
+        });
+    
+        authors.forEach(author => {
+            author.style.fontSize = (articleHeight * 0.10) + 'px';
+        });
+    };
+};
+
 async function loadArticle() {
     const lastArticle = currentArticle + newsPerLoad;
     const newsElement = newsId.slice(currentArticle, lastArticle);
@@ -52,8 +86,11 @@ async function loadArticle() {
 
     currentArticle = lastArticle;
 
+    resizeArticlesText();
+    window.addEventListener('resize', resizeArticlesText);
+
     if(currentArticle >= newsId.length) {
-        loadButton.style.display = 'none';
+        loadButton.textContent = 'NO MORE ARTICLE TO LOAD';
     };
 };
 

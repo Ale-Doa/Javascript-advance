@@ -1,5 +1,5 @@
 .news {
-    margin: 4% 13% 5% 13%;
+    margin: 4% 13% 5% 10%;
     border-radius: 25px;
     overflow: auto;
     max-height: 61vh;
@@ -15,8 +15,8 @@
     border-top: 1px solid rgba(255, 255, 255, 0.4);
     border-left: 1px solid rgba(255, 255, 255, 0.3);    
 
-    height: 150px;
-    margin: 10px 0 0 0;
+    height: 16vh;
+    margin: 1vh 0 0 0;
     padding: 10px 10px;
 
     text-align: left;
@@ -25,10 +25,9 @@
 
 .title {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 7%;
+    left: 1.5%;
 
-    font-size: 40px;
     max-width: 97%;
     white-space: nowrap; 
     overflow: hidden; 
@@ -37,17 +36,14 @@
 
 .date {
     position: absolute;
-    top: 120px;
-    right: 5px;
+    bottom: 7%;
+    right: 1.5%;
 
     text-align: right;
-    margin-right: 7px;
 }
 
 .author {
     position: absolute;
-    top: 117px;
-    left: 10px;
-
-    font-size: 20px;
+    bottom: 7%;
+    left: 1.5%;
 }

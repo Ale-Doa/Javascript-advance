@@ -1,0 +1,87 @@
+@media screen and (orientation: portrait) {
+  .news {
+    max-height: 75vh;
+  }
+
+  .bubble-1 {
+    top: 3%;
+    left: 3%;
+    width: 40%;
+  }
+
+  .bubble-2 {
+    top: 35%;
+    left: 46%;
+    width: 35%;
+  }
+
+  .bubble-3 {
+    top: -9%;
+    right: -5%;
+    width: 37%;
+  }
+
+  .bubble-4 {
+    top: 70%;
+    left: 8%;
+    width: 27%;
+  }
+
+  .bubble-5 {
+    top: 75%;
+    right: 1%;
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .article {
+    max-height: 10vh;
+  }
+
+  .header-title {
+    font-size: 7.2vw;
+    margin: 5vh 0 1vh 0;
+  }
+
+  .load-button {
+    width: 170px;
+    height: 45px;
+    font-size: 18px;
+    margin: 2vh auto 2vh auto;
+  }
+
+  .news {
+    max-height: 77vh;
+  }
+
+  .bubble-1 {
+    top: 15%;
+    left: -5%;
+    width: 50%;
+  }
+
+  .bubble-2 {
+    top: 43%;
+    left: 45%;
+    width: 47%;
+  }
+
+  .bubble-3 {
+    top: -3%;
+    right: -5%;
+    width: 53%;
+  }
+
+  .bubble-4 {
+    top: 68%;
+    left: 7%;
+    width: 30%;
+  }
+
+  .bubble-5 {
+    top: 75%;
+    right: -1%;
+    width: 40%;
+  }
+}
