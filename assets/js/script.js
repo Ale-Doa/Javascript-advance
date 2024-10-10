@@ -74,7 +74,13 @@ function resizeArticlesText() {
     };
 };
 
-async function loadArticle() {
+function showCustomAlert() {
+    const customAlert = document.querySelector('.custom-alert');
+    customAlert.classList.remove('hidden');
+    setTimeout(() => {customAlert.classList.add('hidden')}, 1500);
+};
+
+async function loadArticle(shawAlert = false) {
     const lastArticle = currentArticle + newsPerLoad;
     const newsElement = newsId.slice(currentArticle, lastArticle);
 
@@ -92,9 +98,13 @@ async function loadArticle() {
     if(currentArticle >= newsId.length) {
         loadButton.textContent = 'NO MORE ARTICLE TO LOAD';
     };
+
+    if(shawAlert) {
+        showCustomAlert();
+    };
 };
 
-loadButton.addEventListener('click', loadArticle);  
+loadButton.addEventListener('click', () => loadArticle(true)); 
 
 async function initApp() {
     await fetchNewsId();
