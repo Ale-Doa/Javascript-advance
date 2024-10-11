@@ -48,7 +48,7 @@ function resizeArticlesText() {
     const articleHeight = articles.offsetHeight;
 
     titles.forEach(title => {
-        title.style.fontSize = (articleHeight * 0.33) + 'px';
+        title.style.fontSize = (articleHeight * 0.26) + 'px';
     });
 
     dates.forEach(date => {
@@ -74,13 +74,13 @@ function resizeArticlesText() {
     };
 };
 
-function showCustomAlert() {
-    const customAlert = document.querySelector('.custom-alert');
-    customAlert.classList.remove('hidden');
-    setTimeout(() => {customAlert.classList.add('hidden')}, 1500);
-};
+// function showCustomAlert() {
+//     const customAlert = document.querySelector('.custom-alert');
+//     customAlert.classList.remove('hidden');
+//     setTimeout(() => {customAlert.classList.add('hidden')}, 1500);
+// };
 
-async function loadArticle(shawAlert = false) {
+async function loadArticle(shawAlert = false) {  //showAlert = false, serve nel caso si voglia utilizzare il custom-alert
     const lastArticle = currentArticle + newsPerLoad;
     const newsElement = newsId.slice(currentArticle, lastArticle);
 
@@ -104,7 +104,7 @@ async function loadArticle(shawAlert = false) {
     };
 };
 
-loadButton.addEventListener('click', () => loadArticle(true)); 
+loadButton.addEventListener('click', loadArticle());  //aggiungere il parametro true per far funzionare il custom-alert
 
 async function initApp() {
     await fetchNewsId();

@@ -40,28 +40,6 @@ html {
     scrollbar-width: none;
 }
 
-.custom-alert {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    background-color: rgb(0, 205, 0);
-    color: white;
-    font-size: 19px;
-    border-radius: 30px;
-    text-align: center;
-    width: 300px;
-    height: 80px;
-    line-height: 77px;
-    z-index: 10;
-    margin: 0 auto;
-}
-
-.hidden {
-    display: none;
-}
-
 .load-button {
     display: block;
     position: relative;
@@ -79,8 +57,7 @@ html {
     height: 85px;
 }
 
-@import "_bubble.scss";
-
+@import "_bubble.scss"; 
 @import "_article.scss";
-
 @import "_media-query.scss";
+@import "_custom-alert.scss";
