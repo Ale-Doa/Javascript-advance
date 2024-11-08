@@ -41,6 +41,10 @@ news-about-tech/
 └── README.md
 ```
 
+## Problematiche
+
+Quanto si clicca il bottone per caricare altri siti non si ha un feedback, questo per alcuni utenti potreppe essere un problema, all'interno del codice javascript, commentato, c'è un blocco che crea un alert quanto gli articoli vengono aggiunti, ma viene caricato con troppo delay.
+
 ## Licenza
 
 Distribuito sotto licenza MIT.
