@@ -41,11 +41,12 @@ function createArticle(newsItem) {
 };
 
 function resizeArticlesText() {
-    const articles = document.querySelector('.article');
+    const articles = document.querySelectorAll('.article');
+    if (articles.length === 0) return;
     const titles = document.querySelectorAll('.title');
     const dates = document.querySelectorAll('.date');
     const authors = document.querySelectorAll('.author');
-    const articleHeight = articles.offsetHeight;
+    const articleHeight = articles[0].offsetHeight;
 
     titles.forEach(title => {
         title.style.fontSize = (articleHeight * 0.26) + 'px';
@@ -92,11 +93,17 @@ async function loadArticle(shawAlert = false) {  //showAlert = false, serve nel 
 
     currentArticle = lastArticle;
 
+    // Aspetta che il DOM sia aggiornato prima di ridimensionare il testo
+    setTimeout(() => {
+        resizeArticlesText();
+    }, 0);
+
     resizeArticlesText();
     window.addEventListener('resize', resizeArticlesText);
 
     if(currentArticle >= newsId.length) {
         loadButton.textContent = 'NO MORE ARTICLE TO LOAD';
+        loadButton.disabled = true;
     };
 
     if(shawAlert) {
@@ -104,7 +111,7 @@ async function loadArticle(shawAlert = false) {  //showAlert = false, serve nel 
     };
 };
 
-loadButton.addEventListener('click', loadArticle());  //aggiungere il parametro true per far funzionare il custom-alert
+loadButton.addEventListener('click', () => loadArticle());  //aggiungere il parametro true per far funzionare il custom-alert
 
 async function initApp() {
     await fetchNewsId();
