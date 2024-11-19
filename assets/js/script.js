@@ -3,119 +3,137 @@ const loadButton = document.querySelector('.load-button');
 
 let newsId = [];
 let currentArticle = 0;
-let newsPerLoad = 10;
+const newsPerLoad = 10;
 
 async function fetchNewsId() {
-    const response = await fetch('https://hacker-news.firebaseio.com/v0/newstories.json');
-    newsId = await response.json();
-};
+    try {
+        const response = await axios.get('https://hacker-news.firebaseio.com/v0/newstories.json');
+        // Utilizzo di Lodash per gestire l'array di ID
+        newsId = _.take(response.data, 500); // Limita a 500 ID come richiesto
+    } catch (error) {
+        console.error('Errore nel recupero degli ID delle notizie:', error);
+    }
+}
 
 async function fetchNewsItem(id) {
-    const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
-    return await response.json();
-};
+    try {
+        const response = await axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
+        return response.data;
+    } catch (error) {
+        console.error(`Errore nel recupero della notizia con ID ${id}:`, error);
+        return null;
+    }
+}
 
+// Utilizzo di Lodash per la creazione dell'articolo
 function createArticle(newsItem) {
+    // Utilizzo di _.get per un accesso sicuro alle proprietà
     const article = document.createElement('a');
     article.className = 'article';
     article.target = '_blank';
-    article.href = newsItem.url;
+    article.href = _.get(newsItem, 'url', '#');
 
     const title = document.createElement('h2');
-    title.textContent = newsItem.title;
+    title.textContent = _.get(newsItem, 'title', 'Titolo non disponibile');
     title.className = 'title';
 
     const date = document.createElement('p');
     date.className = 'date';
-    date.textContent = new Date(newsItem.time * 1000).toLocaleString();
+    date.textContent = _.get(newsItem, 'time') 
+        ? new Date(newsItem.time * 1000).toLocaleString()
+        : 'Data non disponibile';
 
     const author = document.createElement('p');
     author.className = 'author';
-    author.textContent = 'Written by: ' + newsItem.by;
+    author.textContent = `Written by: ${_.get(newsItem, 'by', 'Autore anonimo')}`;
 
     article.appendChild(title);
     article.appendChild(date);
     article.appendChild(author);
 
     return article;
-};
+}
 
+// Utilizzo di Lodash per il ridimensionamento
 function resizeArticlesText() {
     const articles = document.querySelectorAll('.article');
-    if (articles.length === 0) return;
+    if (_.isEmpty(articles)) return;
+
     const titles = document.querySelectorAll('.title');
     const dates = document.querySelectorAll('.date');
     const authors = document.querySelectorAll('.author');
-    const articleHeight = articles[0].offsetHeight;
+    
+    const articleHeight = _.first(articles).offsetHeight;
 
-    titles.forEach(title => {
-        title.style.fontSize = (articleHeight * 0.26) + 'px';
+    // Utilizzo di Lodash forEach per iterare
+    _.forEach(titles, title => {
+        title.style.fontSize = `${articleHeight * 0.26}px`;
     });
 
-    dates.forEach(date => {
-        date.style.fontSize = (articleHeight * 0.15) + 'px';
+    _.forEach(dates, date => {
+        date.style.fontSize = `${articleHeight * 0.15}px`;
     });
 
-    authors.forEach(author => {
-        author.style.fontSize = (articleHeight * 0.15) + 'px';
+    _.forEach(authors, author => {
+        author.style.fontSize = `${articleHeight * 0.15}px`;
     });
 
-    if(articles.offsetWidth < 790) {
-        titles.forEach(title => {
-            title.style.fontSize = (articleHeight * 0.30) + 'px';
+    if(window.innerWidth < 790) {
+        _.forEach(titles, title => {
+            title.style.fontSize = `${articleHeight * 0.30}px`;
         });
     
-        dates.forEach(date => {
-            date.style.fontSize = (articleHeight * 0.10) + 'px';
+        _.forEach(dates, date => {
+            date.style.fontSize = `${articleHeight * 0.10}px`;
         });
     
-        authors.forEach(author => {
-            author.style.fontSize = (articleHeight * 0.10) + 'px';
+        _.forEach(authors, author => {
+            author.style.fontSize = `${articleHeight * 0.10}px`;
         });
-    };
-};
+    }
+}
 
-// function showCustomAlert() {
-//     const customAlert = document.querySelector('.custom-alert');
-//     customAlert.classList.remove('hidden');
-//     setTimeout(() => {customAlert.classList.add('hidden')}, 1500);
-// };
-
-async function loadArticle(shawAlert = false) {  //showAlert = false, serve nel caso si voglia utilizzare il custom-alert
+async function loadArticle(showAlert = false) {
+    // Utilizzo di Lodash per gestire l'array di notizie
     const lastArticle = currentArticle + newsPerLoad;
-    const newsElement = newsId.slice(currentArticle, lastArticle);
+    const newsElement = _.slice(newsId, currentArticle, lastArticle);
 
-    for (const id of newsElement) {
-        const newsItem = await fetchNewsItem(id);
-        const newArticol = createArticle(newsItem);
-        news.appendChild(newArticol);
-    };
+    // Utilizzo di Promise.all con Axios per chiamate parallele
+    const newsItems = await Promise.all(
+        _.map(newsElement, id => fetchNewsItem(id))
+    );
+
+    // Filtra gli elementi nulli
+    const validNewsItems = _.compact(newsItems);
+
+    _.forEach(validNewsItems, newsItem => {
+        const newArticle = createArticle(newsItem);
+        news.appendChild(newArticle);
+    });
 
     currentArticle = lastArticle;
 
     // Aspetta che il DOM sia aggiornato prima di ridimensionare il testo
-    setTimeout(() => {
-        resizeArticlesText();
-    }, 0);
-
-    resizeArticlesText();
-    window.addEventListener('resize', resizeArticlesText);
+    setTimeout(resizeArticlesText, 0);
 
     if(currentArticle >= newsId.length) {
         loadButton.textContent = 'NO MORE ARTICLE TO LOAD';
         loadButton.disabled = true;
-    };
+    }
 
-    if(shawAlert) {
+    if(showAlert) {
         showCustomAlert();
-    };
-};
+    }
+}
 
-loadButton.addEventListener('click', () => loadArticle());  //aggiungere il parametro true per far funzionare il custom-alert
+// Correzione dell'event listener del pulsante
+loadButton.addEventListener('click', () => loadArticle());
+
+window.addEventListener('resize', resizeArticlesText);
 
 async function initApp() {
     await fetchNewsId();
     await loadArticle();
-};
+}
 
 initApp();
