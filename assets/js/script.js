@@ -9,7 +9,7 @@ function resetApplicationState() {
     newsId = [];
     currentArticle = 0;
     loadButton.disabled = false;
-    loadButton.textContent = 'LOAD MORE ARTICLES';
+    loadButton.textContent = 'LOAD MORE';
 }
 
 async function fetchNewsId() {
@@ -40,7 +40,7 @@ function showLoadingState() {
 }
 
 function hideLoadingState() {
-    loadButton.textContent = 'LOAD MORE ARTICLES';
+    loadButton.textContent = 'LOAD MORE';
     loadButton.disabled = false;
 }
 
